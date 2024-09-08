@@ -3,7 +3,7 @@ import {  Image, Layout, Menu, theme } from "antd";
 import logo from "../../assets/logo/vitctory.png";
 import { Link, Outlet } from "react-router-dom";
 import Footer from "../ui/shared/footer/Footer,";
-import Hero from "../../pages/Home/Hero";
+ 
 
 const { Header, Content } = Layout;
 
@@ -73,8 +73,8 @@ const MainLayout: React.FC = () => {
           </p>
         </div>
       </Header>
-      <Hero />
-      <Content  className="md:px-[48px]">
+       
+      <Content  className=" ">
         {/* <Breadcrumb style={{ margin: "16px 0" }}>
           <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>List</Breadcrumb.Item>

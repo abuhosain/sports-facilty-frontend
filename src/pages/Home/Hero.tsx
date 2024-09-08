@@ -28,7 +28,7 @@ const Hero = () => {
   ];
 
   return (
-    <Carousel arrows infinite={true}>
+    <Carousel arrows infinite={false} autoplay>
       {hero.map(item => (
         <div key={item.id} className="w-full relative h-[600px] bg-gray-800">
           <img
