@@ -24,6 +24,10 @@ const items = [
     key: 4,
     label: <Link to="/contact">Contact Us</Link>,
   },
+  {
+    key: 5,
+    label: <Link to="/dashboard">Dashboard</Link>,
+  },
 ];
 
 const MainLayout: React.FC = () => {
@@ -68,9 +72,10 @@ const MainLayout: React.FC = () => {
           className="justify-center text-xl"
         />
         <div>
-          <p className="text-xl text-white font-bold px-5 py-2 bg-lime-500 rounded-md">
+         <Link to="/login" className="cursor-pointer">
+         <p className="text-xl flex items-center mt-3 text-white font-bold px-5 py-2 bg-lime-500 rounded-md">
             Login
-          </p>
+          </p></Link>
         </div>
       </Header>
        
