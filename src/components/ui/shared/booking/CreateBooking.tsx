@@ -23,7 +23,7 @@ const CreateBooking: React.FC<CreateBookingProps> = ({ facilityId }) => {
       endTime,
     };
 
-    console.log("Booking Data: ", bookingData); // Debug log
+    // console.log("Booking Data: ", bookingData); // Debug log
 
     try {
       // Use the createBooking mutation to send data to the backend
@@ -35,6 +35,7 @@ const CreateBooking: React.FC<CreateBookingProps> = ({ facilityId }) => {
       message.success("Booking created successfully!");
     } catch (error) {
       console.error("Error creating booking:", error);
+     
       message.error("Failed to create booking.");
     }
   };

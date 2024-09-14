@@ -3,9 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Collapse, Row, Col } from 'antd';
 import { useGetAllFacilitiesQuery } from '../redux/features/admin/adminManagement.api';
- 
-
-const { Panel } = Collapse;
 
 const FacilityDetails: React.FC = () => {
   const { id } = useParams();
@@ -26,8 +23,72 @@ const FacilityDetails: React.FC = () => {
 
   const { image, name, description, pricePerHour, location } = facilityDetails;
 
+  // Define the collapse items using the new `items` prop
+  const collapseItems = [
+    {
+      key: '1',
+      label: 'Facility Amenities',
+      children: (
+        <>
+          <p>
+            Our facility offers a wide range of amenities including free parking, 
+            fully equipped locker rooms with showers, and a comfortable lounge area 
+            where you can relax before or after your game. We also have a café on-site 
+            offering refreshments and light snacks.
+          </p>
+          <p>
+            Additional features include Wi-Fi access, seating for spectators, and 
+            climate control to ensure comfort in all weather conditions.
+          </p>
+        </>
+      ),
+    },
+    {
+      key: '2',
+      label: 'Booking Terms & Conditions',
+      children: (
+        <>
+          <p>
+            When booking a facility, please ensure you do so at least 24 hours in 
+            advance. Cancellations must be made no less than 12 hours prior to your 
+            booking time, or a cancellation fee will apply.
+          </p>
+          <p>
+            Please respect the rules of the facility, including no smoking, no alcohol, 
+            and appropriate sports attire at all times. We reserve the right to refuse 
+            service to anyone not adhering to these rules.
+          </p>
+          <p>
+            Payments must be made in full prior to your booking. Failure to do so may 
+            result in your booking being canceled.
+          </p>
+        </>
+      ),
+    },
+    {
+      key: '3',
+      label: 'Reviews',
+      children: (
+        <>
+          <p>
+            <strong>John Doe:</strong> "Had a fantastic time at this facility. 
+            The staff were friendly, and the amenities were top-notch!"
+          </p>
+          <p>
+            <strong>Jane Smith:</strong> "Clean and well-maintained. I will 
+            definitely be booking again in the future."
+          </p>
+          <p>
+            <strong>David Lee:</strong> "A great experience, though the booking 
+            system could be a little more intuitive. Otherwise, fantastic!"
+          </p>
+        </>
+      ),
+    },
+  ];
+
   return (
-    <div className="py-10   px-4 lg:px-20">
+    <div className="py-10 px-4 lg:px-20">
       {/* Facility Details */}
       <Row gutter={[16, 16]} className="justify-center">
         <Col xs={24} md={12}>
@@ -45,13 +106,14 @@ const FacilityDetails: React.FC = () => {
               <p className="text-lg text-gray-600 mb-4">Location: {location}</p>
               <p className="text-xl text-blue-600 font-bold">Price per hour: ${pricePerHour}</p>
             </div>
-            <Link to={`/bookings/${id}`}> <Button
-              type="primary"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg py-2 mt-6"
-              block
-            >
-              Book Now
-            </Button>
+            <Link to={`/bookings/${id}`}>
+              <Button
+                type="primary"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg py-2 mt-6"
+                block
+              >
+                Book Now
+              </Button>
             </Link>
           </div>
         </Col>
@@ -59,50 +121,7 @@ const FacilityDetails: React.FC = () => {
 
       {/* Additional Information in Collapse */}
       <div className="mt-10">
-        <Collapse accordion>
-          <Panel header="Facility Amenities" key="1">
-            <p>
-              Our facility offers a wide range of amenities including free parking, 
-              fully equipped locker rooms with showers, and a comfortable lounge area 
-              where you can relax before or after your game. We also have a café on-site 
-              offering refreshments and light snacks.
-            </p>
-            <p>
-              Additional features include Wi-Fi access, seating for spectators, and 
-              climate control to ensure comfort in all weather conditions.
-            </p>
-          </Panel>
-          <Panel header="Booking Terms & Conditions" key="2">
-            <p>
-              When booking a facility, please ensure you do so at least 24 hours in 
-              advance. Cancellations must be made no less than 12 hours prior to your 
-              booking time, or a cancellation fee will apply.
-            </p>
-            <p>
-              Please respect the rules of the facility, including no smoking, no alcohol, 
-              and appropriate sports attire at all times. We reserve the right to refuse 
-              service to anyone not adhering to these rules.
-            </p>
-            <p>
-              Payments must be made in full prior to your booking. Failure to do so may 
-              result in your booking being canceled.
-            </p>
-          </Panel>
-          <Panel header="Reviews" key="3">
-            <p>
-              <strong>John Doe:</strong> "Had a fantastic time at this facility. 
-              The staff were friendly, and the amenities were top-notch!"
-            </p>
-            <p>
-              <strong>Jane Smith:</strong> "Clean and well-maintained. I will 
-              definitely be booking again in the future."
-            </p>
-            <p>
-              <strong>David Lee:</strong> "A great experience, though the booking 
-              system could be a little more intuitive. Otherwise, fantastic!"
-            </p>
-          </Panel>
-        </Collapse>
+        <Collapse accordion items={collapseItems} />
       </div>
     </div>
   );

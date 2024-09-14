@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from 'react';
-import { Input, Row, Col } from 'antd';
+import { Input, Row, Col, Pagination } from 'antd';
 import { useGetAllFacilitiesQuery } from '../redux/features/admin/adminManagement.api';
 import { Link } from 'react-router-dom';
 
@@ -10,12 +11,14 @@ const Facility: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredFacilities, setFilteredFacilities] = useState<any[]>([]);
   const [minPrice, setMinPrice] = useState<number>(0); // Default min price
-  const [maxPrice, setMaxPrice] = useState<number>(1000); // Default max price
+  const [maxPrice, setMaxPrice] = useState<number>(10000); // Default max price
+  const [currentPage, setCurrentPage] = useState<number>(1); // Pagination state
+  const [pageSize, setPageSize] = useState<number>(8); // Number of items per page
 
   useEffect(() => {
     // If facilities are loaded, dynamically set the max price based on facility data
     if (facilities?.data?.length) {
-      const maxFacilityPrice =  10000;
+      const maxFacilityPrice = 10000;
       setMaxPrice(maxFacilityPrice);
     }
   }, [facilities]);
@@ -47,7 +50,15 @@ const Facility: React.FC = () => {
     return <div className="flex justify-center items-center h-screen">Loading...</div>;
   }
 
-  const displayFacilities = searchTerm || minPrice !== 0 || maxPrice !== 10000 ? filteredFacilities : facilities?.data;
+  // Pagination logic: slice facilities based on current page and page size
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const paginatedFacilities = (searchTerm || minPrice !== 0 || maxPrice !== 10000 ? filteredFacilities : facilities?.data)?.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number, pageSize: number) => {
+    setCurrentPage(page);
+    setPageSize(pageSize);
+  };
 
   return (
     <div className="py-10 px-4 lg:px-20">
@@ -96,7 +107,7 @@ const Facility: React.FC = () => {
 
       {/* Facility Grid */}
       <Row gutter={[16, 16]} className=" ">
-        {displayFacilities?.map((facility: any) => (
+        {paginatedFacilities?.map((facility: any) => (
           <Col xs={24} sm={12} md={8} lg={6} key={facility._id}>
             <div className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden">
               <img
@@ -117,6 +128,17 @@ const Facility: React.FC = () => {
           </Col>
         ))}
       </Row>
+
+      {/* Pagination */}
+      <div className="flex justify-center mt-10">
+        <Pagination
+          current={currentPage}
+          pageSize={pageSize}
+          total={facilities?.data?.length || 0}
+          onChange={handlePageChange}
+          showSizeChanger
+        />
+      </div>
     </div>
   );
 };

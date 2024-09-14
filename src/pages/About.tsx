@@ -1,7 +1,5 @@
 import { Carousel, Card, Row, Col } from "antd";
  
- 
-import image3 from "../assets/images/testimonial/profile4.jpg";
 
 const About = () => {
   const teamMembers = [
