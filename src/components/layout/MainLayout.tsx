@@ -1,39 +1,58 @@
 import React from "react";
-import {  Image, Layout, Menu, theme } from "antd";
+import { Image, Layout, Menu, theme } from "antd";
 import logo from "../../assets/logo/vitctory.png";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+ 
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
+import { useCurrentToken, setUser } from "../../redux/features/auth/authSlice";
+import { verifyToken } from "../../utils/verifyToken";
 import Footer from "../ui/shared/footer/Footer,";
  
 
 const { Header, Content } = Layout;
 
-const items = [
-  {
-    key: 1,
-    label: <Link to="/">Home</Link>,
-  },
-  {
-    key: 2,
-    label: <Link to="/facilty">Facilty</Link>,
-  },
-  {
-    key: 3,
-    label: <Link to="/about">About Us</Link>,
-  },
-  {
-    key: 4,
-    label: <Link to="/contact">Contact Us</Link>,
-  },
-  {
-    key: 5,
-    label: <Link to="/dashboard">Dashboard</Link>,
-  },
-];
-
 const MainLayout: React.FC = () => {
+  const token = useAppSelector(useCurrentToken);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  let user;
+  if (token) {
+    user = verifyToken(token);
+  }
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const handleLogout = () => {
+    dispatch(setUser({ user: null, token: null }));
+    navigate('/');
+  };
+
+  const items = [
+    {
+      key: 1,
+      label: <Link to="/">Home</Link>,
+    },
+    {
+      key: 2,
+      label: <Link to="/facility">Facility</Link>,
+    },
+    {
+      key: 3,
+      label: <Link to="/about">About Us</Link>,
+    },
+    {
+      key: 4,
+      label: <Link to="/contact">Contact Us</Link>,
+    },
+    ...(user ? [
+      {
+        key: 5,
+        label: <Link to={`${user.role}/dashboard`}>Dashboard</Link>,
+      }
+    ] : []),
+  ];
 
   return (
     <Layout style={{ width: "100%" }}>
@@ -72,19 +91,24 @@ const MainLayout: React.FC = () => {
           className="justify-center text-xl"
         />
         <div>
-         <Link to="/login" className="cursor-pointer">
-         <p className="text-xl flex items-center mt-3 text-white font-bold px-5 py-2 bg-lime-500 rounded-md">
-            Login
-          </p></Link>
+          {user ? (
+            <p
+              onClick={handleLogout}
+              className="text-xl flex items-center mt-3 text-white font-bold px-5 py-2 bg-red-500 rounded-md cursor-pointer"
+            >
+              Logout
+            </p>
+          ) : (
+            <Link to="/login" className="cursor-pointer">
+              <p className="text-xl flex items-center mt-3 text-white font-bold px-5 py-2 bg-lime-500 rounded-md">
+                Login
+              </p>
+            </Link>
+          )}
         </div>
       </Header>
-       
-      <Content  className=" ">
-        {/* <Breadcrumb style={{ margin: "16px 0" }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb> */}
+
+      <Content>
         <div
           style={{
             padding: 24,
@@ -93,7 +117,7 @@ const MainLayout: React.FC = () => {
             borderRadius: borderRadiusLG,
           }}
         >
-           <Outlet />
+          <Outlet />
         </div>
       </Content>
       <Footer />

@@ -5,6 +5,8 @@ import { TUser, useCurrentToken } from "../../../redux/features/auth/authSlice";
 import { verifyToken } from "../../../utils/verifyToken";
 import { sidebarItemsGenerator } from "../../../utils/sidebarItemsGenerator";
 import { userPath } from "../../../routes/user.routes";
+import { Link } from "react-router-dom";
+import { adminPath } from "../../../routes/admin.routes";
  
  
 const userRole = {
@@ -26,9 +28,9 @@ const Sidebar = () => {
   let sidebarItems;
 
   switch ((user as unknown as TUser)!.role) {
-    // case userRole.Admin:
-    //   sidebarItems = sidebarItemsGenerator(adminPaths, userRole.Admin)
-    //   break;
+    case userRole.Admin:
+      sidebarItems = sidebarItemsGenerator(adminPath, userRole.Admin)
+      break;
     case userRole.User:
       sidebarItems = sidebarItemsGenerator(userPath, userRole.User)
       break;
@@ -57,7 +59,7 @@ const Sidebar = () => {
           alignItems: "center",
         }}
       >
-        <h1>Victory Zone</h1>
+       <Link to={"/"}> <h1>Victory Zone</h1></Link>
       </div>
       <Menu
         theme="dark"

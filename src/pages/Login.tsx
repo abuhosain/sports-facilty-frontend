@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom"; // Import Link from react-router-dom
@@ -40,8 +42,8 @@ const Login: React.FC = () => {
       dispatch(setUser({ user: user, token: res.token }));
       toast.success("logged in", { id: toastId, duration: 2000 });
       console.log(res);
-    //   navigate(`/dashboard/${user.role}`);
-    } catch (err) {
+      navigate("/");
+    } catch (err : any) {
       toast.error("something went wrong", { id: toastId, duration: 2000 });
     }
     console.log(data);

@@ -1,34 +1,31 @@
 import React from 'react';
 import { Carousel } from 'antd';
 import 'antd/dist/reset.css'; // Import Ant Design reset styles for consistent layout
-import proile1 from "../../assets/images/testimonial/profile1.jpg"
-import proile2 from "../../assets/images/testimonial/profile2.jpg"
-import proile3 from "../../assets/images/testimonial/profle3.jpg"
-import proile4 from "../../assets/images/testimonial/profile4.jpg"
+ 
 const testimonials = [
   {
     id: 1,
     name: "John Doe",
     review: "This is the best sports facility booking platform I have ever used. Super easy and convenient!",
-    photo: proile1
+    photo: "https://i.ibb.co.com/MNd7GfF/profle3.jpg"
   },
   {
     id: 2,
     name: "Jane Smith",
     review: "A seamless experience! I booked a sports ground in just a few clicks. Highly recommend!",
-    photo: proile2
+    photo: "https://i.ibb.co.com/yQpkWpT/avatar2.jpg"
   },
   {
     id: 3,
     name: "Mike Williams",
     review: "The platform offers a variety of venues and the booking process is straightforward. Love it!",
-    photo: proile3
+    photo: "https://i.ibb.co.com/WsrXfFy/avatar3.jpg"
   },
   {
     id: 4,
     name: "Sarah Johnson",
     review: "Amazing service, friendly staff, and a great selection of venues. Couldn't ask for more!",
-    photo: proile4
+    photo: "https://i.ibb.co.com/ryVGD5L/avatar1.jpg"
   }
 ];
 

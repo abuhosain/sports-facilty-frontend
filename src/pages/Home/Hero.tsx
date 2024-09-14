@@ -1,27 +1,24 @@
  
 import { Carousel } from 'antd';
-import ground1 from '../../assets/images/ground1.jpg';
-import ground2 from '../../assets/images/ground2.jpg';
-import ground3 from '../../assets/images/ground3.jpg';
-
+ 
 const Hero = () => {
   const hero = [
  
     {
       "id": 1,
-      "image": ground1,
+      "image": "https://i.ibb.co.com/yfsGp1r/ground1.jpg",
       "title": "Book Your Facility Today",
       "description": "Discover a wide range of sports facilities available for booking at your convenience. From indoor courts to outdoor fields, our platform offers a seamless booking experience tailored to your needs. Book now and enjoy your favorite sports with ease!"
     },
     {
       "id": 2,
-      "image": ground2,
+      "image": "https://i.ibb.co.com/jgj2Bf4/ground2.jpg",
       "title": "Ultimate Sports Experience",
       "description": "Get the best out of your sports activities with our top-notch facilities. Our platform ensures that you have access to the best venues, equipment, and services. Whether for a game or practice, make the most of your sports time with our easy-to-use booking system."
     },
     {
       "id": 3,
-      "image": ground3,
+      "image": "https://i.ibb.co.com/CsRpMcp/ground3.jpg",
       "title": "Top Rated Sports Venues",
       "description": "Explore our top-rated sports venues, highly recommended by our users for their quality and service. Find the perfect place for your next game or practice, and experience exceptional facilities and support. Book now and see why these venues are the best!"
     }
