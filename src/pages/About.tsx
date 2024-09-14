@@ -1,6 +1,6 @@
 import { Carousel, Card, Row, Col } from "antd";
-import image1 from "../assets/images/testimonial/profile1.jpg";
-import image2 from "../assets/images/testimonial/profile2.jpg";
+ 
+ 
 import image3 from "../assets/images/testimonial/profile4.jpg";
 
 const About = () => {
@@ -8,20 +8,20 @@ const About = () => {
     {
       name: "John Doe",
       role: "CEO",
-      image: image1,
+      image: "https://i.ibb.co.com/q7RrJ7T/profile1.jpg",
       description:
         "John is the visionary behind our company, leading with passion.",
     },
     {
       name: "Jane Smith",
       role: "CTO",
-      image: image2,
+      image: "https://i.ibb.co.com/DwzTzDc/profile2.jpg",
       description: "Jane ensures the tech behind our platform is top-notch.",
     },
     {
       name: "Mike Brown",
       role: "COO",
-      image: image3,
+      image: "https://i.ibb.co.com/d0hxsk2/profile4.jpg",
       description: "Mike handles day-to-day operations with great efficiency.",
     },
   ];

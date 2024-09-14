@@ -1,3 +1,4 @@
+// src/routes/router.tsx
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home/Home";
@@ -12,6 +13,10 @@ import SignUp from "../pages/SignUp";
 import Facility from "../pages/Facility";
 import FacilityDetails from "../pages/FacilityDetails";
 import Booking from "../pages/Booking";
+import NotFound from "../components/ui/NotFound";
+import Unauthorized from "../components/ui/Unauthorized";
+import ProtectedRoute from "./ProtectedRoutes";
+ 
 
 const router = createBrowserRouter([
   {
@@ -53,13 +58,29 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "*",
+    element: <NotFound />,
+  },
+  {
+    path: "/unauthorized",
+    element: <Unauthorized />,
+  },
+  {
     path: "/user",
-    element: <Dashboard />,
+    element: (
+      <ProtectedRoute allowedRoles={['user']}>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
     children: routesGenerator(userPath),
   },
   {
     path: "/admin",
-    element: <Dashboard />,
+    element: (
+      <ProtectedRoute allowedRoles={['admin']}>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
     children: routesGenerator(adminPath),
   },
 ]);

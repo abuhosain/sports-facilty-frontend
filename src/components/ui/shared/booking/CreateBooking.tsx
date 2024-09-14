@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { Button, Form, DatePicker, TimePicker, message } from "antd";
 import moment from "moment";

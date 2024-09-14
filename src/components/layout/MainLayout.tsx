@@ -1,8 +1,8 @@
-import React from "react";
-import { Image, Layout, Menu, theme } from "antd";
+import React, { useState, useEffect } from "react";
+import { Image, Layout, Menu, Button } from "antd";
 import logo from "../../assets/logo/vitctory.png";
 import { Link, Outlet, useNavigate } from "react-router-dom";
- 
+import { UpOutlined } from '@ant-design/icons';
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { useCurrentToken, setUser } from "../../redux/features/auth/authSlice";
 import { verifyToken } from "../../utils/verifyToken";
@@ -15,42 +15,44 @@ const MainLayout: React.FC = () => {
   const token = useAppSelector(useCurrentToken);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [showScrollButton, setShowScrollButton] = useState(false);
+
   let user;
   if (token) {
     user = verifyToken(token);
   }
-
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
 
   const handleLogout = () => {
     dispatch(setUser({ user: null, token: null }));
     navigate('/');
   };
 
-  const items = [
-    {
-      key: 1,
-      label: <Link to="/">Home</Link>,
-    },
-    {
-      key: 2,
-      label: <Link to="/facility">Facility</Link>,
-    },
-    {
-      key: 3,
-      label: <Link to="/about">About Us</Link>,
-    },
-    {
-      key: 4,
-      label: <Link to="/contact">Contact Us</Link>,
-    },
-    ...(user ? [
-      {
-        key: 5,
-        label: <Link to={`${user.role}/dashboard`}>Dashboard</Link>,
+  // Show/Hide Scroll Button based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.pageYOffset > 300) {
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
       }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const items = [
+    { key: 1, label: <Link to="/">Home</Link> },
+    { key: 2, label: <Link to="/facility">Facility</Link> },
+    { key: 3, label: <Link to="/about">About Us</Link> },
+    { key: 4, label: <Link to="/contact">Contact Us</Link> },
+    ...(user ? [
+      { key: 5, label: <Link to={`${user.role}/dashboard`}>Dashboard</Link> }
     ] : []),
   ];
 
@@ -113,14 +115,26 @@ const MainLayout: React.FC = () => {
           style={{
             padding: 24,
             minHeight: 380,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
+            background: "#fff",
+            borderRadius: 8,
           }}
         >
           <Outlet />
         </div>
       </Content>
+
       <Footer />
+
+      {/* Back to Top Button */}
+      {showScrollButton && (
+        <Button
+          type="primary"
+          shape="circle"
+          icon={<UpOutlined />}
+          onClick={scrollToTop}
+          className="fixed bottom-10 right-10 z-50 bg-blue-600 hover:bg-blue-700 shadow-lg"
+        />
+      )}
     </Layout>
   );
 };
