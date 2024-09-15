@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import {
@@ -104,7 +105,7 @@ const FacilityManagement: React.FC = () => {
     {
       title: "Actions",
       key: "actions",
-      render: (text: any, record: any) => (
+      render: (  record: any) => (
         <Space size="middle">
           <Button
             type="primary"

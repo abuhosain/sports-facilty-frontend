@@ -1,5 +1,6 @@
  
 import { Carousel } from 'antd';
+import { Link } from 'react-router-dom';
  
 const Hero = () => {
   const hero = [
@@ -40,9 +41,10 @@ const Hero = () => {
             <p className="text-xl mb-6 text-white w-3/4">
               {item.description}
             </p>
-            <button className="bg-green-500 rounded-lg text-3xl px-4 py-3 text-white hover:bg-green-600">
+           <Link to={"/facility"}>
+           <button className="bg-green-500 rounded-lg text-3xl px-4 py-3 text-white hover:bg-green-600">
               Book Now
-            </button>
+            </button></Link>
           </div>
         </div>
       ))}

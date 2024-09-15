@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { Bar } from "react-chartjs-2";
 import {
@@ -24,7 +25,7 @@ dayjs.extend(relativeTime);
 
 const AdminDashboard: React.FC = () => {
   const token = useAppSelector(useCurrentToken);
-  let user ;
+  let user : any ;
   if (token) {
     user = verifyToken(token);
   }

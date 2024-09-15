@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import { Image, Layout, Menu, Button } from "antd";
 import logo from "../../assets/logo/vitctory.png";
@@ -17,7 +18,7 @@ const MainLayout: React.FC = () => {
   const navigate = useNavigate();
   const [showScrollButton, setShowScrollButton] = useState(false);
 
-  let user;
+  let user : any;
   if (token) {
     user = verifyToken(token);
   }

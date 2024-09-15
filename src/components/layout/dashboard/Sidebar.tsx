@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
 import { useAppSelector } from "../../../redux/hooks";
@@ -16,7 +17,7 @@ const userRole = {
 
 const Sidebar = () => {
   const token = useAppSelector(useCurrentToken);
-  let user;
+  let user : any;
   if (token) {
     user = verifyToken(token);
   }
