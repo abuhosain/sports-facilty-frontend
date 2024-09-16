@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useGetUserBookingbyIdQuery } from "../../../redux/features/admin/userManagement.api";
 import { useEffect } from "react";
- 
 import { Card, Descriptions, Spin, Alert, Divider } from "antd";
 
 const UserBookingDetails = () => {
@@ -33,7 +32,7 @@ const UserBookingDetails = () => {
   const booking = data?.data;
 
   return (
-    <div className="container mx-auto p-8" style={{ width: "90%" }}>
+    <div className="p-4 sm:p-6 md:p-8 mx-auto max-w-screen-sm">
       <Card
         title="Booking Details"
         bordered={true}
@@ -41,16 +40,16 @@ const UserBookingDetails = () => {
           <img
             alt="facility"
             src="https://i.ibb.co.com/yfsGp1r/ground1.jpg"
-            className="w-full h-60 mt-2 object-cover"
+            className="w-full h-48 sm:h-60 object-cover"
           />
         }
         style={{ marginBottom: "20px" }}
       >
-        <Descriptions bordered column={1}  >
+        <Descriptions bordered column={1}>
           <Descriptions.Item label="Facility">{booking?.facility?.name}</Descriptions.Item>
-          <Descriptions.Item label="Date">{ booking?.date }</Descriptions.Item>
+          <Descriptions.Item label="Date">{booking?.date}</Descriptions.Item>
           <Descriptions.Item label="Start Time">{booking?.startTime}</Descriptions.Item>
-          <Descriptions.Item label="End Time">{ booking?.endTime}</Descriptions.Item>
+          <Descriptions.Item label="End Time">{booking?.endTime}</Descriptions.Item>
           <Descriptions.Item label="Status">{booking?.isBooked ? "Booked" : "Not Booked"}</Descriptions.Item>
           <Descriptions.Item label="Payable Amount">${booking?.payableAmount ?? '0.00'}</Descriptions.Item>
           <Descriptions.Item label="Transaction ID">{booking?.transactionId ?? 'N/A'}</Descriptions.Item>

@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Card, List, Avatar, Badge } from "antd";
+import { Card, List, Avatar, Badge, Col, Row } from "antd";
 import dayjs from "dayjs"; // For displaying today's date
 import relativeTime from "dayjs/plugin/relativeTime"; // Import relativeTime plugin
 import { useAppSelector } from "../../../redux/hooks";
@@ -25,7 +25,7 @@ dayjs.extend(relativeTime);
 
 const UserDashboard: React.FC = () => {
   const token = useAppSelector(useCurrentToken);
-  let user : any;
+  let user: any;
   if (token) {
     user = verifyToken(token);
   }
@@ -95,51 +95,59 @@ const UserDashboard: React.FC = () => {
   ];
 
   return (
-    <div className="p-6">
+    <div className="p-4 md:p-6">
       {/* Welcome Section */}
       <Card className="mb-6">
-        <h1 className="text-4xl font-bold">
+        <h1 className="text-2xl md:text-4xl font-bold">
           Welcome, {user ? user.name : "User"}!
         </h1>
-        <p className="text-gray-600 text-xl">Today is {today}</p>
+        <p className="text-gray-600 text-lg md:text-xl">Today is {today}</p>
       </Card>
 
-      {/* Notification Section */}
-      <Card className="mb-6">
-        <h2 className="text-xl font-semibold mb-4">Notifications</h2>
-        <List
-          itemLayout="horizontal"
-          dataSource={notifications}
-          renderItem={(notification) => (
-            <List.Item>
-              <List.Item.Meta
-                avatar={
-                  <Badge count={1}>
-                    <Avatar icon={<i className="fas fa-bell" />} />
-                  </Badge>
-                }
-                title={notification.title}
-                description={
-                  <>
-                    <p>{notification.description}</p>
-                    <span className="text-gray-500 text-sm">{notification.datetime}</span>
-                  </>
-                }
-              />
-            </List.Item>
-          )}
-        />
-      </Card>
+      <Row gutter={[16, 16]}>
+        {/* Notification Section */}
+        <Col xs={24} lg={12}>
+          <Card className="mb-6">
+            <h2 className="text-lg md:text-xl font-semibold mb-4">Notifications</h2>
+            <List
+              itemLayout="horizontal"
+              dataSource={notifications}
+              renderItem={(notification) => (
+                <List.Item>
+                  <List.Item.Meta
+                    avatar={
+                      <Badge count={1}>
+                        <Avatar icon={<i className="fas fa-bell" />} />
+                      </Badge>
+                    }
+                    title={notification.title}
+                    description={
+                      <>
+                        <p>{notification.description}</p>
+                        <span className="text-gray-500 text-sm">
+                          {notification.datetime}
+                        </span>
+                      </>
+                    }
+                  />
+                </List.Item>
+              )}
+            />
+          </Card>
+        </Col>
 
-      {/* Activity Chart Section */}
-      <Card className="mb-6">
-        <h2 className="text-xl font-semibold mb-4">Your Activity</h2>
-        <Bar data={chartData} options={chartOptions} />
-      </Card>
+        {/* Activity Chart Section */}
+        <Col xs={24} lg={12}>
+          <Card className="mb-6">
+            <h2 className="text-lg md:text-xl font-semibold mb-4">Your Activity</h2>
+            <Bar data={chartData} options={chartOptions} />
+          </Card>
+        </Col>
+      </Row>
 
       {/* Recent Activity Section */}
       <Card>
-        <h2 className="text-xl font-semibold mb-4">Recent Activities</h2>
+        <h2 className="text-lg md:text-xl font-semibold mb-4">Recent Activities</h2>
         <List
           dataSource={recentActivities}
           renderItem={(activity) => (

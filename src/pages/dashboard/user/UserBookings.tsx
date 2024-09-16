@@ -1,7 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import { Table, Button, Space, message } from "antd";
 import dayjs from "dayjs";
-import { useGetUserBookingQuery, useDeleteUserBookingbyIdMutation } from "../../../redux/features/admin/userManagement.api";
+import {
+  useGetUserBookingQuery,
+  useDeleteUserBookingbyIdMutation,
+} from "../../../redux/features/admin/userManagement.api";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -110,9 +114,17 @@ const UserBookings: React.FC = () => {
   };
 
   return (
-    <div>
+    <div style={{ padding: '16px' }}>
       <h1>Your Bookings</h1>
-      <Table columns={columns} dataSource={bookings} rowKey="_id" />
+      <div style={{ overflowX: 'auto' }}>
+        <Table
+          columns={columns}
+          dataSource={bookings}
+          rowKey="_id"
+          scroll={{ x: 800 }} // Set a minimum width to enable horizontal scrolling
+          style={{ minWidth: '100%' }} // Ensure the table takes full width
+        />
+      </div>
     </div>
   );
 };

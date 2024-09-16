@@ -69,7 +69,7 @@ const FacilityManagement: React.FC = () => {
         message.success("Facility created successfully");
       }
       setIsModalVisible(false);
-    } catch ( error) {
+    } catch (error) {
       message.error("Failed to submit form");
     }
   };
@@ -98,14 +98,14 @@ const FacilityManagement: React.FC = () => {
         <img
           src={imageUrl}
           alt="facility"
-          style={{ width: "80px", height: "50px", objectFit: "cover" }}
+          style={{ width: "100px", height: "60px", objectFit: "cover" }}
         />
       ),
     },
     {
       title: "Actions",
       key: "actions",
-      render: (  record: any) => (
+      render: (record: any) => (
         <Space size="middle">
           <Button
             type="primary"
@@ -130,7 +130,7 @@ const FacilityManagement: React.FC = () => {
   ];
 
   return (
-    <div>
+    <div  >
       <Title level={2}>Facility Management</Title>
       <Button
         type="primary"
@@ -146,6 +146,7 @@ const FacilityManagement: React.FC = () => {
         loading={isLoading}
         rowKey="_id"
         pagination={{ pageSize: 5 }}
+        scroll={{ x: 'max-content' }} // Make table scrollable on smaller screens
       />
 
       <Modal
@@ -153,7 +154,8 @@ const FacilityManagement: React.FC = () => {
         visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         footer={null}
-        width={800} // Increased modal width
+        width="90%" // Responsive modal width
+        style={{ maxWidth: "800px" }} // Limit max modal width
       >
         <Form form={form} onFinish={handleFinish} layout="vertical">
           <Form.Item

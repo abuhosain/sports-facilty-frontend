@@ -25,7 +25,7 @@ dayjs.extend(relativeTime);
 
 const AdminDashboard: React.FC = () => {
   const token = useAppSelector(useCurrentToken);
-  let user : any ;
+  let user: any;
   if (token) {
     user = verifyToken(token);
   }
@@ -93,28 +93,28 @@ const AdminDashboard: React.FC = () => {
   ];
 
   return (
-    <div className="p-6">
+    <div className="p-4 sm:p-6 md:p-8 lg:p-10">
       {/* Welcome Section */}
       <Card className="mb-6">
-        <h1 className="text-4xl font-bold">
+        <h1 className="text-2xl md:text-4xl font-bold">
           Welcome, {user ? user?.name : "Admin"}!
         </h1>
-        <p className="text-gray-600 text-xl">Today is {today}</p>
+        <p className="text-gray-600 text-lg md:text-xl">Today is {today}</p>
       </Card>
 
       {/* Statistics Section */}
       <Row gutter={16} className="mb-6">
-        <Col span={8}>
+        <Col xs={24} sm={12} md={8}>
           <Card>
             <Statistic title="Total Users" value={1024} />
           </Card>
         </Col>
-        <Col span={8}>
+        <Col xs={24} sm={12} md={8}>
           <Card>
             <Statistic title="Active Bookings" value={37} />
           </Card>
         </Col>
-        <Col span={8}>
+        <Col xs={24} sm={12} md={8}>
           <Card>
             <Statistic title="Total Revenue" value={10230} prefix="$" />
           </Card>
@@ -154,7 +154,9 @@ const AdminDashboard: React.FC = () => {
       {/* Activity Chart Section */}
       <Card className="mb-6">
         <h2 className="text-xl font-semibold mb-4">Platform Activity</h2>
-        <Bar data={chartData} options={chartOptions} />
+        <div className="h-64 md:h-80">
+          <Bar data={chartData} options={chartOptions} />
+        </div>
       </Card>
 
       {/* Recent Activity Section */}

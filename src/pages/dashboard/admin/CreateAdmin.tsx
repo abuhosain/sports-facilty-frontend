@@ -23,7 +23,8 @@ const CreateAdmin: React.FC = () => {
     <div style={{ padding: '20px' }}>
       <Title level={2} style={{ textAlign: 'center', marginBottom: '20px' }}>Create Admin</Title>
       <Row gutter={16}>
-        <Col span={16}>
+        {/* Admin Details Column */}
+        <Col xs={24} sm={24} md={16} lg={16} xl={16}>
           <Card title="Admin Details" bordered={false}>
             <Form form={form} onFinish={handleFinish} layout="vertical">
               <Form.Item
@@ -69,7 +70,8 @@ const CreateAdmin: React.FC = () => {
             </Form>
           </Card>
         </Col>
-        <Col span={8}>
+        {/* Preview Column */}
+        <Col xs={24} sm={24} md={8} lg={8} xl={8}>
           <Card title="Preview" bordered={false}>
             <div style={{ padding: '10px' }}>
               <Typography.Text strong>Name:</Typography.Text> <br />

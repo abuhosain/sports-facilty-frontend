@@ -1,6 +1,7 @@
- 
 import { Table, Typography } from 'antd';
 import { useGetAllBookingsQuery } from "../../../redux/features/admin/adminManagement.api";
+
+const { Title, Text } = Typography;
 
 const AdminBooking = () => {
   const { data, isLoading, isError } = useGetAllBookingsQuery(undefined);
@@ -54,17 +55,18 @@ const AdminBooking = () => {
     },
   ];
 
-  if (isLoading) return <Typography.Text>Loading...</Typography.Text>;
-  if (isError) return <Typography.Text type="danger">Error loading bookings</Typography.Text>;
+  if (isLoading) return <Text>Loading...</Text>;
+  if (isError) return <Text type="danger">Error loading bookings</Text>;
 
   return (
-    <div>
-      <h1>Admin Booking Management</h1>
+    <div style={{ padding: '16px', maxWidth: '100%', boxSizing: 'border-box' }}>
+      <Title level={2} style={{ fontSize: '1.5rem', marginBottom: '16px' }}>Admin Booking Management</Title>
       <Table
         dataSource={data?.data || []}  
         columns={columns}
         rowKey="_id"  
         pagination={{ pageSize: 10 }}  
+        scroll={{ x: 'max-content' }} // Horizontal scrolling for table
       />
     </div>
   );
